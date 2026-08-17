@@ -36,6 +36,7 @@ export default class Game {
         if (this.piles[pileId][this.piles[pileId].length - 1] > cardToPlay) {
             let oldPile = this.piles[pileId];
             this.piles[pileId] = [cardToPlay];
+            console.log(this.utilities.calculatePointsOfPile(oldPile))
             return this.utilities.calculatePointsOfPile(oldPile);
         }
         this.piles[pileId].push(cardToPlay);

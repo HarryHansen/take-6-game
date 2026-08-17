@@ -1,3 +1,5 @@
+import MenuHandler from "./menu-handler.js";
+
 export default class Utilities {
     constructor() {}
 
@@ -15,5 +17,12 @@ export default class Utilities {
             points += this.calculatePoints(p);
         });
         return points;
+    }
+
+    async ask(question = "An error occured", options) {
+        const handler = new MenuHandler();
+        let answer = await handler.runMenu(question, options);
+        if (answer !== null) return answer;
+        return options[0];
     }
 }
