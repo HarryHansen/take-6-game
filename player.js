@@ -1,4 +1,3 @@
-import { InputHandler } from "./inputHandler.js";
 import MenuHandler from "./menu-handler.js";
 
 export class Player {
@@ -11,33 +10,32 @@ export class Player {
     async choose(piles) {
         let playedCard = 0;
         let chosenPile = 0;
+        let modifiedPiles = [];
         console.log(
             `Die Stapel sind ${piles.join(" oder ")}\nDu hast diese Karten: ${this.ownDeck}`,
         );
 
-        playedCard = await this.ask("Welche Karte möchtest du spielen?");
-        chosenPile = await this.ask("Auf welchen Stapel möchtest du deine Karte legen?");
+        playedCard = await this.ask(
+            "Welche Karte möchtest du spielen?",
+            this.ownDeck,
+        );
+        for (let i = 0; i < piles.length; i++) {
+            modifiedPiles.push({ name: JSON.stringify(piles[i]), value: i });
+        }
+        chosenPile = await this.ask(
+            "Auf welchen Stapel möchtest du deine Karte legen?",
+            modifiedPiles,
+        );
 
         this.ownDeck = this.ownDeck.filter((e) => e !== playedCard);
 
         return [playedCard, chosenPile];
     }
 
-    async ask(question = "An error occured") {
-        const handler = new InputHandler();
-        let answer;
-
-        try {
-            answer = await handler.askNumber(question);
-        } catch (error) {
-            // Hier wird der Fehler abgefangen, wenn die Validierung in askNumber fehlschlägt
-            console.error(
-                `\n❌ Ein kritischer Fehler ist aufgetreten: ${error.message}`,
-            );
-        } finally {
-            // Die Schnittstelle muss immer geschlossen werden, egal ob Erfolg oder Misserfolg!
-            handler.close();
-        }
-        return answer;
+    async ask(question = "An error occured", options) {
+        const handler = new MenuHandler();
+        let answer = await handler.runMenu(question, options);
+        if (answer !== null) return answer;
+        return options[0];
     }
 }

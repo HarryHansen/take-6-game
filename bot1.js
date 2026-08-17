@@ -11,16 +11,16 @@ export default class Bot1 {
     choose(piles) {
         let playableCards = [];
         let playedCard = 0;
-        console.log("\nBot1 is choosing which card to play ...");
-        console.log("Evaluating minimium ...");
+        // console.log("\nBot1 is choosing which card to play ...");
+        // console.log("Evaluating minimium ...");
 
         let pileMax = piles.map((row) => {
-            console.log(`Min in row is ${row[row.length - 1]}`);
+            // console.log(`Min in row is ${row[row.length - 1]}`);
 
             return row[row.length - 1];
         });
         let smallestPileMax = Math.min(...pileMax);
-        console.log(`chose ${smallestPileMax}`);
+        // console.log(`chose ${smallestPileMax}`);
 
         playableCards.push(
             ...this.ownDeck.filter((num) => num > smallestPileMax),
@@ -35,16 +35,20 @@ export default class Bot1 {
             const e = piles[i];
             if (e[e.length - 1] < playableCards[0]) possiblePiles.push(i);
         }
-        console.log(possiblePiles);
+        // console.log(possiblePiles);
         if (possiblePiles.length > 1) {
-            possiblePiles = possiblePiles.sort((a, b) => a - b);
-            console.log(
+            /*             console.log(
                 "possiblePiles[possiblePiles.length - 1]:" +
                     possiblePiles[possiblePiles.length - 1],
+            ); */
+            possiblePiles = possiblePiles.sort(
+                (a, b) =>
+                    piles[a][piles[a].length - 1] -
+                    piles[b][piles[b].length - 1],
             );
             possiblePiles = [possiblePiles[possiblePiles.length - 1]];
         }
-        console.log(possiblePiles);
+        // console.log(possiblePiles);
 
         if (possiblePiles.length === 0) {
             let bestPile = [];

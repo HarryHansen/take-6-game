@@ -1,6 +1,7 @@
 import Game from "./game.js";
 import Bot1 from "./bot1.js";
 import { Player } from "./player.js";
+import { styleText } from "node:util";
 
 let amountOfPlayers = 2;
 let cardsPerPlayer = 10;
@@ -14,7 +15,10 @@ async function loop() {
         let cardBot1 = await bot1.choose(game.piles);
         bot1.collectedPoints += game.playCard(cardBot1[1], cardBot1[0]);
         console.log(
-            `Der Bot hat die Karte ${cardBot1[0]} auf den Stapel ${cardBot1[1]} gelegt \n`,
+            styleText(
+                "green",
+                `Der Bot hat die Karte ${cardBot1[0]} auf den Stapel mit der Karte/den Karten ${game.piles[cardBot1[1]].slice(0, game.piles[cardBot1[1]].length - 1)} gelegt \n`,
+            ),
         );
 
         let cardPlayer = await player.choose(game.piles);
