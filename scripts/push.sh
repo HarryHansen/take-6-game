@@ -1,7 +1,16 @@
-#!/bin/bash
-npm test || exit 1          # Stops if tests fail
+#!/usr/bin/env bash
+set -e
+
+echo "🧪 Running tests (non-interactive mode)..."
+CI=true npx vitest run --coverage=false || { echo "❌ Tests failed. Aborting."; exit 1; }
+
 git add .
-read -p "📝 Enter commit message: " msg
-[ -z "$msg" ] && exit 1     # Prevents empty commits
+
+# POSIX-kompatibles Prompt (ersetzt das fehlerhafte read -p)
+printf "📝 Enter commit message: "
+read msg < /dev/tty  # Erzwingt Lesezugriff auf die echte Konsole
+
+[ -z "$msg" ] && { echo "❌ No commit message. Aborting."; exit 1; }
+
 git commit -m "$msg"
 git push

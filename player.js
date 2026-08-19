@@ -13,25 +13,50 @@ export class Player {
         let playedCard = 0;
         let chosenPile = 0;
         let modifiedPiles = [];
-        console.log(
-            `Die Stapel sind ${piles.map((p) => p.join(", ")).join(" oder ")}\nDu hast diese Karten: ${this.ownDeck.join(", ")}`,
+
+        console.log("Das sind die Stapel:");
+
+        const pileNames = Array.from(
+            { length: piles.length },
+            (_, i) => `Stapel ${i + 1}`,
         );
 
-        playedCard = await this.utilities.ask("Welche Karte möchtest du spielen?", [
-            ...this.ownDeck,
-            "Spiel abbrechen",
-        ]);
+        const maxLen = Math.max(...piles.map((p) => p.length));
+
+        const transposed = Array.from({ length: maxLen }, (_, i) =>
+            piles.map((pile) => pile[i] ?? "-"),
+        );
+        console.table(transposed);
+
+        playedCard = await this.utilities.ask(
+            "Welche Karte möchtest du spielen?",
+            [...this.ownDeck, "Spiel abbrechen"],
+        );
         if (playedCard === "Spiel abbrechen") {
             game.stopped = true;
+            game.aborted = true;
             return [this.ownDeck.pop(), Math.floor(Math.random() * 3)];
         }
-        for (let i = 0; i < piles.length; i++) {
-            modifiedPiles.push({ name: JSON.stringify(piles[i]), value: i });
-        }
-        chosenPile = await this.utilities.ask(
-            "Auf welchen Stapel möchtest du deine Karte legen?",
-            modifiedPiles,
+        let possiblePiles = this.utilities.getValidPile(
+            playedCard,
+            piles,
+            false,
         );
+        if (possiblePiles[1] === true) {
+            for (let i = 0; i < possiblePiles[0].length; i++) {
+                let pile = piles[possiblePiles[0][i]];
+                modifiedPiles.push({
+                    name: `${JSON.stringify(pile)} -> ${this.utilities.calculatePointsOfPile(pile)} Hornochse(n)`,
+                    value: i,
+                });
+            }
+            chosenPile = await this.utilities.ask(
+                "Welchen Stapel möchtest du nehmen?",
+                modifiedPiles,
+            );
+        } else {
+            chosenPile = possiblePiles[0];
+        }
 
         this.ownDeck = this.ownDeck.filter((e) => e !== playedCard);
 

@@ -24,38 +24,16 @@ export default class Bot1 {
             playableCards.push(this.ownDeck[0]);
         }
 
-        let possiblePiles = [];
-
-        for (let i = 0; i < piles.length; i++) {
-            const e = piles[i];
-            if (e[e.length - 1] < playableCards[0]) possiblePiles.push(i);
-        }
-        if (possiblePiles.length > 1) {
-            possiblePiles = possiblePiles.sort(
-                (a, b) =>
-                    piles[a][piles[a].length - 1] -
-                    piles[b][piles[b].length - 1],
-            );
-            possiblePiles = [possiblePiles[possiblePiles.length - 1]];
-        }
-
-        if (possiblePiles.length === 0) {
-            let bestPile = [];
-            let pointsOfBestPile = 100;
-            for (let i = 0; i < piles.length; i++) {
-                const e = piles[i];
-                if (
-                    this.utilities.calculatePointsOfPile(e) < pointsOfBestPile
-                ) {
-                    bestPile = [i];
-                }
-            }
-            possiblePiles = bestPile;
-        }
-
         playedCard = playableCards[0];
+
+        let possiblePiles = this.utilities.getValidPile(
+            playedCard,
+            piles,
+            true,
+        );
+
         this.ownDeck = this.ownDeck.filter((e) => e !== playedCard);
 
-        return [playedCard, possiblePiles[0]];
+        return [playedCard, possiblePiles];
     }
 }

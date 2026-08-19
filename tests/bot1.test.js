@@ -96,3 +96,5 @@ describe("Bot1", () => {
         });
     });
 });
+
+// Todo: Implement tests if playedCard < smallestPileMax
