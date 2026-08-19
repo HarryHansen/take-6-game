@@ -4,7 +4,8 @@
   "description": "A simulation of a game called 6nimmt to see which strategy is the best",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "push": "git add . && git commit -m \"Automated push\" && git push"
   },
   "keywords": [],
   "type": "module",
