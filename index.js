@@ -1,5 +1,5 @@
 import Game from "./game.js";
-import Bot1 from "./bot1.js";
+import Bot1 from "./bots/bot1.js";
 import { Player } from "./player.js";
 import { styleText } from "node:util";
 import Utilities from "./utilities.js";

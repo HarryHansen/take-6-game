@@ -1,9 +1,21 @@
 import MenuHandler from "./menu-handler.js";
 
 export default class Utilities {
-    constructor() {}
+    constructor() {
+        this.handler = new MenuHandler();
+    }
 
-    calculatePoints(card) {
+    calculatePoints(card = 0) {
+        if (
+            typeof card !== "number" ||
+            card < 1 ||
+            card > 104 ||
+            card === null ||
+            card === undefined ||
+            card % Math.floor(card) !== 0
+        ) {
+            return undefined;
+        }
         if (card % 55 === 0) return 7;
         if (card % 11 === 0) return 5;
         if (card % 10 === 0) return 3;
@@ -13,9 +25,22 @@ export default class Utilities {
 
     calculatePointsOfPile(pile) {
         let points = 0;
+        let invalid = false;
+
+        if (Array.isArray(pile) !== true || pile.length > 5) return undefined;
+        if (new Set(pile).size !== pile.length) return undefined;
+        if (pile.filter((p) => typeof p === "number").length !== pile.length)
+            return undefined;
+
         pile.forEach((p) => {
-            points += this.calculatePoints(p);
+            let point = this.calculatePoints(p);
+            if (point === undefined) {
+                invalid = true;
+            } else {
+                points += point;
+            }
         });
+        if (invalid === true) return undefined;
         return points;
     }
 
@@ -62,8 +87,7 @@ export default class Utilities {
     }
 
     async ask(question = "An error occured", options) {
-        const handler = new MenuHandler();
-        let answer = await handler.runMenu(question, options);
+        let answer = await this.handler.runMenu(question, options);
         if (answer !== null) return answer;
         return options[0];
     }

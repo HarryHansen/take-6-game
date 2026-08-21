@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import Bot1 from "../bot1";
+import Bot1 from "../bots/bot1.js";
 
 describe("Bot1", () => {
     let bot;
@@ -7,7 +7,6 @@ describe("Bot1", () => {
     const playerId = 0;
 
     beforeEach(() => {
-        // Neue Instanz pro Test, Deck wird kopiert um Seiteneffekte zu vermeiden
         bot = new Bot1(testDeck, playerId);
     });
 
