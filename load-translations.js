@@ -22,7 +22,6 @@ export async function loadTranslations(lang) {
     }
 
     loadingPromise = (async () => {
-        console.log(`[LOAD] Starte Ladevorgang für Sprache ${lang}...`);
         const messages = {};
         const langConfig = languages[lang];
 
@@ -53,7 +52,6 @@ export async function loadTranslations(lang) {
         }
 
         loadedMessages[lang] = messages;
-        console.log(`[LOAD] Fertig mit ${lang}.`);
         return loadedMessages[lang];
     })();
 

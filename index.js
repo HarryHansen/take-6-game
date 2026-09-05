@@ -34,12 +34,12 @@ async function play() {
 
     let rules = await t("rules.rules");
     if (answer === answerTextOnboarding.showRules) console.log(rules);
-    if (answer === answerTextOnboarding.showSettings) {
+    if (answer === answerTextOnboarding.stopGame) {
         variables.stopped = true;
         variables.aborted = true;
     }
 
-    if (answer === "Einstellungen anzeigen") {
+    if (answer === answerTextOnboarding.showSettings) {
         await menuHandler.showSettings();
     }
 
@@ -82,7 +82,5 @@ async function play() {
     }
 }
 
-console.log("Setting lang");
 await setDefaultLang();
-console.log(`Lang is ${variables.settings.lang}`);
 play();
