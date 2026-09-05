@@ -1,4 +1,5 @@
 import inquirer from "inquirer";
+import { variables } from "./variables.js";
 
 export default class MenuHandler {
     constructor() {}
@@ -33,6 +34,45 @@ export default class MenuHandler {
             );
             console.log(error);
             return null;
+        }
+    }
+
+    async showSettings() {
+        const settings = [
+            {
+                question: "Welche Sprache sprichst du?",
+                type: "select",
+                choices: ["Deutsch", "English"],
+                matchingSetting: "lang",
+            },
+            {
+                question: "Was ist dein Name?",
+                type: "freeInput",
+                choices: [],
+                matchingSetting: "name",
+            },
+            {
+                question: "Wie viele Leute spielen mit?",
+                type: "freeInput",
+                choices: [],
+                matchingSetting: "amountOfPlayers",
+            },
+            {
+                question:
+                    "Möchtest du beim Nehmen automatisch den günstigsten Stapel nehmen?",
+                type: "select",
+                choices: ["Ja", "Nein"],
+                matchingSetting: "alwaysTakeCheapestPile",
+            },
+        ];
+        for (let i = 0; i < settings.length; i++) {
+            const setting = settings[i];
+            const answer = await this.runMenu(
+                setting.question,
+                setting.choices,
+            );
+
+            variables.settings[setting.matchingSetting] = answer;
         }
     }
 }

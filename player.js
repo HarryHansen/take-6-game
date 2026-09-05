@@ -1,5 +1,6 @@
 import Utilities from "./utilities.js";
 import { game } from "./index.js";
+import { variables } from "./variables.js";
 
 export class Player {
     constructor(deck, playerId) {
@@ -14,34 +15,24 @@ export class Player {
         let chosenPile = 0;
         let modifiedPiles = [];
 
-        console.log("Das sind die Stapel:");
-
-        const pileNames = Array.from(
-            { length: piles.length },
-            (_, i) => `Stapel ${i + 1}`,
-        );
-
-        const maxLen = Math.max(...piles.map((p) => p.length));
-
-        const transposed = Array.from({ length: maxLen }, (_, i) =>
-            piles.map((pile) => pile[i] ?? "-"),
-        );
-        console.table(transposed);
+        this.utilities.showPilesTable(piles);
 
         playedCard = await this.utilities.ask(
             "Welche Karte möchtest du spielen?",
             [...this.ownDeck, "Spiel abbrechen"],
         );
         if (playedCard === "Spiel abbrechen") {
-            game.stopped = true;
-            game.aborted = true;
+            variables.stopped = true;
+            variables.aborted = true;
             return [this.ownDeck.pop(), Math.floor(Math.random() * 3)];
         }
+
         let possiblePiles = this.utilities.getValidPile(
             playedCard,
             piles,
             false,
         );
+
         if (possiblePiles[1] === true) {
             for (let i = 0; i < possiblePiles[0].length; i++) {
                 let pile = piles[possiblePiles[0][i]];

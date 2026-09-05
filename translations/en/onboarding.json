@@ -1,0 +1,9 @@
+{
+    "hello": "Welcome at the inofficial Terminal Version of \"Sechs nimmt\" 👋🏻",
+    "options": {
+        "startGame": "Start playing directly",
+        "showRules": "Show rules",
+        "stopGame": "Stop game",
+        "showSettings": "Show settings"
+    }
+}

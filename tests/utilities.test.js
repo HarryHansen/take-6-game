@@ -452,18 +452,13 @@ describe("Utilities", () => {
         });
     });
     describe("Checke calculatePointsOfPile Funktion", () => {
-        // ─────────────────────────────────────────────
-        //  VALID INPUTS
-        // ─────────────────────────────────────────────
         describe("Valid Inputs", () => {
-            // --- 0 Karten ---
             describe("Pile mit 0 Karten", () => {
                 it("leeres Array", () => {
                     expect(utility.calculatePointsOfPile([])).toBe(0);
                 });
             });
 
-            // --- 1 Karte ---
             describe("Pile mit 1 Karte", () => {
                 it("Karte 1 (Punkte: 1)", () => {
                     expect(utility.calculatePointsOfPile([1])).toBe(1);
@@ -485,7 +480,6 @@ describe("Utilities", () => {
                 });
             });
 
-            // --- 2 Karten ---
             describe("Pile mit 2 Karten", () => {
                 it("Karten [1, 2] → 1 + 1 = 2", () => {
                     expect(utility.calculatePointsOfPile([1, 2])).toBe(2);
@@ -504,7 +498,6 @@ describe("Utilities", () => {
                 });
             });
 
-            // --- 3 Karten ---
             describe("Pile mit 3 Karten", () => {
                 it("Karten [1, 5, 10] → 1 + 2 + 3 = 6", () => {
                     expect(utility.calculatePointsOfPile([1, 5, 10])).toBe(6);
@@ -522,7 +515,6 @@ describe("Utilities", () => {
                 });
             });
 
-            // --- 4 Karten ---
             describe("Pile mit 4 Karten", () => {
                 it("Karten [1, 5, 10, 11] → 1 + 2 + 3 + 5 = 11", () => {
                     expect(utility.calculatePointsOfPile([1, 5, 10, 11])).toBe(
@@ -539,7 +531,6 @@ describe("Utilities", () => {
                 });
             });
 
-            // --- 5 Karten ---
             describe("Pile mit 5 Karten (Maximum)", () => {
                 it("Karten [1, 5, 10, 11, 55] → 1 + 2 + 3 + 5 + 7 = 18", () => {
                     expect(
@@ -563,7 +554,6 @@ describe("Utilities", () => {
                 });
             });
 
-            // --- Reihenfolge / Unordnung ---
             describe("Reihenfolge der Karten", () => {
                 it("Aufsteigend [1, 5, 10, 11, 55] = 18", () => {
                     expect(
@@ -582,7 +572,6 @@ describe("Utilities", () => {
                 });
             });
 
-            // --- Grenzwerte ---
             describe("Grenzwerte", () => {
                 it("Niedrigste Summe – 5 Karten mit je 1 Punkt", () => {
                     expect(utility.calculatePointsOfPile([1, 2, 3, 4, 6])).toBe(
@@ -600,11 +589,7 @@ describe("Utilities", () => {
             });
         });
 
-        // ─────────────────────────────────────────────
-        //  INVALID INPUTS
-        // ─────────────────────────────────────────────
         describe("Invalid Inputs", () => {
-            // --- Kein Array ---
             describe("Kein Array als Parameter", () => {
                 it("Kein Parameter", () => {
                     expect(utility.calculatePointsOfPile()).toBeUndefined();
@@ -652,7 +637,6 @@ describe("Utilities", () => {
                 });
             });
 
-            // --- Zu viele Elemente (> 5) ---
             describe("Mehr als 5 Karten", () => {
                 it("6 Karten [1,2,3,4,5,6]", () => {
                     expect(
@@ -673,7 +657,6 @@ describe("Utilities", () => {
                 });
             });
 
-            // --- Doppelte Karten ---
             describe("Doppelte Karten (nicht eindeutig)", () => {
                 it("2 gleiche Karten [5, 5]", () => {
                     expect(
@@ -702,7 +685,6 @@ describe("Utilities", () => {
                 });
             });
 
-            // --- Element außerhalb [1, 104] ---
             describe("Kartennamen außerhalb [1, 104]", () => {
                 it("Karte 0", () => {
                     expect(utility.calculatePointsOfPile([0])).toBeUndefined();
@@ -747,7 +729,6 @@ describe("Utilities", () => {
                 });
             });
 
-            // --- Ungültiger Element-Typ im Array ---
             describe("Ungültiger Typ als Array-Element", () => {
                 it('String-Element ["5"]', () => {
                     expect(
@@ -817,7 +798,6 @@ describe("Utilities", () => {
                 });
             });
 
-            // --- Gleitkommazahlen ---
             describe("Gleitkommazahlen als Element", () => {
                 it("1.5", () => {
                     expect(
@@ -836,7 +816,6 @@ describe("Utilities", () => {
                 });
             });
 
-            // --- Spezielle Array-Fälle ---
             describe("Spezielle Array-Fälle", () => {
                 it("Array mit Lücken (sparse) [1, , 3]", () => {
                     const sparse = [1, , 3];

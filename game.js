@@ -1,5 +1,6 @@
 import Decks from "./decks.js";
 import Utilities from "./utilities.js";
+import { variables } from "./variables.js";
 
 export default class Game {
     constructor(amountOfPlayers, cardsPerPlayer, amountOfPiles) {
@@ -10,9 +11,6 @@ export default class Game {
         this.players = this.initPlayers(amountOfPlayers);
         this.pile = this.decks.pile;
         this.piles = this.initPiles(amountOfPiles);
-        this.playersTurn = 0;
-        this.stopped = false;
-        this.aborted = false;
     }
 
     initPlayers() {

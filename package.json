@@ -1,12 +1,13 @@
 {
   "name": "sechs_nimmt",
-  "version": "1.0.0",
+  "version": "1.0.2 - beta 1",
   "description": "A simulation of a game called 6nimmt to see which strategy is the best",
   "main": "index.js",
   "scripts": {
     "test": "vitest",
     "test:ci": "vitest run --coverage",
-    "push": "./scripts/push.sh"
+    "push": "./scripts/push.sh",
+    "start": "node index.js"
   },
   "keywords": [],
   "type": "module",
@@ -14,6 +15,7 @@
     "inquirer": "^14.0.2"
   },
   "devDependencies": {
+    "@vitest/coverage-v8": "^4.1.11",
     "vitest": "^4.1.11"
   }
 }

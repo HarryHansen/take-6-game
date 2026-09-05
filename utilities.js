@@ -86,6 +86,20 @@ export default class Utilities {
         }
     }
 
+    showPilesTable(piles) {
+        console.log("Das sind die Stapel:");
+
+        const pileNames = Array.from(
+            { length: piles.length },
+            (_, i) => `Stapel ${i + 1}`,
+        );
+
+        const transposed = Array.from({ length: 5 }, (_, i) =>
+            piles.map((pile) => pile[i] ?? "-"),
+        );
+        console.table(transposed);
+    }
+
     async ask(question = "An error occured", options) {
         let answer = await this.handler.runMenu(question, options);
         if (answer !== null) return answer;

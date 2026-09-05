@@ -3,6 +3,13 @@ import Bot1 from "./bots/bot1.js";
 import { Player } from "./player.js";
 import { styleText } from "node:util";
 import Utilities from "./utilities.js";
+import { variables } from "./variables.js";
+import MenuHandler from "./menu-handler.js";
+import { t } from "./load-translations.js";
+import {
+    setDefaultLang,
+    writeDefaultLang,
+} from "./utilities/language-settings.js";
 
 let amountOfPlayers = 2;
 let cardsPerPlayer = 10;
@@ -12,22 +19,31 @@ export const game = new Game(amountOfPlayers, cardsPerPlayer, amountOfPiles);
 const bot1 = new Bot1(game.players[0].cards, 0);
 const player = new Player(game.players[1].cards, 1);
 const utilities = new Utilities();
+const menuHandler = new MenuHandler();
 
 async function play() {
-    let answer = await utilities.ask(
-        'Herzlich willkommen bei "Sechs nimmt - die inoffiziele Terminal Version" 👋🏻',
-        ["Spiel direkt starten", "Regeln anzeigen", "Spiel abbrechen"],
-    );
-    if (answer === "Regeln anzeigen")
-        console.log(
-            "Hier stehen in gewisser Zeit vielleicht wirklich die Regeln ... 🫪",
-        );
-    if (answer === "Spiel abbrechen") {
-        game.stopped = true;
-        game.aborted = true;
+    let answerTextHello = await t("onboarding.hello");
+    let answerTextOnboarding = await t("onboarding.options");
+
+    let answer = await utilities.ask(answerTextHello, [
+        answerTextOnboarding.startGame,
+        answerTextOnboarding.showRules,
+        answerTextOnboarding.stopGame,
+        answerTextOnboarding.showSettings,
+    ]);
+
+    let rules = await t("rules.rules");
+    if (answer === answerTextOnboarding.showRules) console.log(rules);
+    if (answer === answerTextOnboarding.showSettings) {
+        variables.stopped = true;
+        variables.aborted = true;
     }
 
-    for (let i = 0; i < cardsPerPlayer && game.stopped === false; i++) {
+    if (answer === "Einstellungen anzeigen") {
+        await menuHandler.showSettings();
+    }
+
+    for (let i = 0; i < cardsPerPlayer && variables.stopped === false; i++) {
         let cardBot1 = await bot1.choose(game.piles);
         bot1.collectedPoints += game.playCard(cardBot1[1], cardBot1[0]);
 
@@ -55,9 +71,9 @@ async function play() {
         let cardPlayer = await player.choose(game.piles);
         player.collectedPoints += game.playCard(cardPlayer[1], cardPlayer[0]);
 
-        if (i >= cardsPerPlayer) game.stopped = true;
+        if (i >= cardsPerPlayer) variables.stopped = true;
     }
-    if (!game.aborted) {
+    if (!variables.aborted) {
         console.log(
             `\nSpieler ${bot1.playerId + 1} hat ${bot1.collectedPoints} Hornochsen gesammelt.\nSpieler ${player.playerId + 1} hat ${player.collectedPoints} Hornochsen gesammelt.`,
         );
@@ -66,4 +82,7 @@ async function play() {
     }
 }
 
+console.log("Setting lang");
+await setDefaultLang();
+console.log(`Lang is ${variables.settings.lang}`);
 play();
