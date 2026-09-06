@@ -1,4 +1,4 @@
-import Utilities from "../utilities.js";
+import Utilities from "../utilities/utilities.js";
 
 export default class Bot2 {
     constructor(deck, playerId) {

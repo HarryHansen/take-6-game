@@ -1,0 +1,12 @@
+{
+    "botPlayedCardText": ["Der Bot hat die Karte ", " auf den Stapel mit der Karte/den Karten ", " gelegt \n"],
+    "botTookPileText": ["Der Bot hat mit der Karte ", " einen Stapel genommen. \n"],
+    "cardToPlay": "Welche Karte möchtest du spielen?",
+    "whichPileToChoose": "Welchen Stapel möchtest du nehmen?",
+    "hornochsen": "Hornochse(n)",
+    "availablePiles": "Das sind die Stapel",
+    "printResults": ["Der Bot hat ", " Hornochsen gesammelt.\nDu hast ", " Hornochsen gesammelt.\n"],
+    "winnerText": ["Also hat der Bot gewonnen. Vielleicht nächstes Mal 😢", "Also hast du gewonnen. Herzlichen Glückwunsch 🥳", "Das Spiel geht folglich unentschieden aus."],
+    "terminateGame": "Spiel abbrechen",
+    "gameTerminated": "Spiel abgebrochen"
+}

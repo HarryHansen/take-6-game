@@ -1,0 +1,17 @@
+{
+    "language": {
+        "question": "Welche Sprache sprichst du?", 
+        "choices": {
+            "de": "Deutsch", 
+            "en": "Englisch"
+        }
+    }, 
+    "name": "Was ist dein Name?",
+    "takeCheapestPile": {
+        "question": "Möchtest du beim Nehmen automatisch den günstigsten Stapel nehmen?",
+        "choices": {
+            "yes": "Ja",
+            "no": "Nein"
+        }
+    }
+}

@@ -1,6 +1,5 @@
 import Decks from "./decks.js";
-import Utilities from "./utilities.js";
-import { variables } from "./variables.js";
+import Utilities from "./utilities/utilities.js";
 
 export default class Game {
     constructor(amountOfPlayers, cardsPerPlayer, amountOfPiles) {

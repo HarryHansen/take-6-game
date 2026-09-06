@@ -1,10 +1,9 @@
-import fs from 'fs/promises';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import fs from "fs/promises";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 
 /**
  * @param {string} fileName - Der Name der Datei (z.B. 'setting.txt').
@@ -13,20 +12,22 @@ const __dirname = path.dirname(__filename);
  */
 export async function readSingleString(fileName) {
     const filePath = path.join(__dirname, fileName);
-    
+
     try {
-        const content = await fs.readFile(filePath, 'utf8');
-        
-        return content.trim(); 
-        
+        const content = await fs.readFile(filePath, "utf8");
+
+        return content.trim();
     } catch (error) {
-        if (error.code === 'ENOENT') {
-            throw new Error(`Die Datei '${fileName}' wurde nicht gefunden. ${new Date().toISOString()}`);
+        if (error.code === "ENOENT") {
+            throw new Error(
+                `Die Datei '${fileName}' wurde nicht gefunden. ${new Date().toISOString()}`,
+            );
         }
-        throw new Error(`Fehler beim Lesen der Datei '${fileName}': ${error.message}`);
+        throw new Error(
+            `Fehler beim Lesen der Datei '${fileName}': ${error.message}`,
+        );
     }
 }
-
 
 /**
  * @param {string} fileName - Der Name der Datei (z.B. 'setting.txt').
@@ -36,15 +37,12 @@ export async function readSingleString(fileName) {
  */
 export async function writeSingleString(fileName, newValue) {
     const filePath = path.join(__dirname, fileName);
-    
-    if (typeof newValue !== 'string' || newValue.trim() === '') {
-        throw new Error('Der Wert, der gespeichert werden soll, muss ein nicht leeres String sein.');
-    }
 
     try {
-        await fs.writeFile(filePath, newValue, 'utf8');
-        console.log(`🎉 Erfolgreich: Der Wert der Datei "${fileName}" wurde auf "${newValue}" gesetzt.`);
+        await fs.writeFile(filePath, newValue, "utf8");
     } catch (error) {
-        throw new Error(`Fehler beim Speichern der Datei '${fileName}': ${error.message}`);
+        throw new Error(
+            `Fehler beim Speichern der Datei '${fileName}': ${error.message}`,
+        );
     }
 }

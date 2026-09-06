@@ -1,26 +1,23 @@
-import { variables } from "./variables.js";
+import { variables } from "../variables.js";
 import * as fs from "fs/promises";
 
-import { fileURLToPath } from 'url';
-import path from 'path';
+import { fileURLToPath } from "url";
+import path from "path";
+import { settings } from "cluster";
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+let __dirname = path.dirname(__filename);
+__dirname = path.dirname(__dirname);
 
 const languages = {
-    de: { domain: "onboarding", files: ["onboarding", "rules"] },
-    en: { domain: "onboarding", files: ["onboarding", "rules"] },
+    de: { domain: "onboarding", files: ["onboarding", "rules", "gameplay", "settings"] },
+    en: { domain: "onboarding", files: ["onboarding", "rules", "gameplay", "settings"] },
 };
 
 let loadedMessages = {};
 let loadingPromise = null;
 
 export async function loadTranslations(lang) {
-    if (loadingPromise) {
-        console.log("Daten werden bereits geladen. Warte...");
-        return loadingPromise;
-    }
-
     loadingPromise = (async () => {
         const messages = {};
         const langConfig = languages[lang];

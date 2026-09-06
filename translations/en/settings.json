@@ -1,0 +1,17 @@
+{
+    "language": {
+        "question": "Which language do you speak?", 
+        "choices": {
+            "de": "German", 
+            "en": "English"
+        }
+    }, 
+    "name": "What's you name?",
+    "takeCheapestPile": {
+        "question": "Do you want to take the pile with the least points automatically when you have to take?",
+        "choices": {
+            "yes": "Yes",
+            "no": "No"
+        }
+    }
+}

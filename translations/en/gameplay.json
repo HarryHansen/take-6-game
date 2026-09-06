@@ -1,0 +1,12 @@
+{
+    "botPlayedCardText": ["The bot played the card ", " on the pile with the card/the cards ", " \n"],
+    "botTookPileText": ["The bot took a pile with the card ", ". \n"],
+    "cardToPlay": "Which card do you want to play?",
+    "whichPileToChoose": "Which pile do you want to take",
+    "hornochsen": "point(s)",
+    "availablePiles": "These are the available piles:",
+    "printResults": ["The bot has collected ", " points. \nYou've collected ", " points.\n"],
+    "winnerText": ["This means that the bot has won. Maybe next time 😢", "This means that you have won. Congrats 🥳", "The game ends with a draw."],
+    "terminateGame": "Terminate game",
+    "gameTerminated": "The game was terminated"
+}

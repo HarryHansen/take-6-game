@@ -1,4 +1,5 @@
 import MenuHandler from "./menu-handler.js";
+import { t } from "./load-translations.js";
 
 export default class Utilities {
     constructor() {
@@ -86,13 +87,9 @@ export default class Utilities {
         }
     }
 
-    showPilesTable(piles) {
-        console.log("Das sind die Stapel:");
-
-        const pileNames = Array.from(
-            { length: piles.length },
-            (_, i) => `Stapel ${i + 1}`,
-        );
+    async showPilesTable(piles) {
+        let text = await t("gameplay.availablePiles");
+        console.log(text);
 
         const transposed = Array.from({ length: 5 }, (_, i) =>
             piles.map((pile) => pile[i] ?? "-"),
