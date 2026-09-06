@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, test } from "vitest";
-import Utilities from "../utilities";
+import Utilities from "../utilities/utilities.js";
 
 describe("Utilities", () => {
     let utility = new Utilities();
