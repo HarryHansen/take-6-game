@@ -29,13 +29,11 @@ export class Player {
             return [this.ownDeck.pop(), Math.floor(Math.random() * 3)];
         }
 
-        console.log(variables.settings.alwaysTakeCheapestPile);
         let possiblePiles = this.utilities.getValidPile(
             playedCard,
             piles,
             variables.settings.alwaysTakeCheapestPile,
         );
-        console.log(possiblePiles);
 
         if (!variables.settings.alwaysTakeCheapestPile) {
             if (possiblePiles[1] === true) {
